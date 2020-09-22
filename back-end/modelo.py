@@ -1,11 +1,12 @@
 from config import  *
+import os
 app = Flask(__name__) 
 # caminho do arquivo de banco de dados 
 caminho = os.path.dirname(os.path.abspath(__file__))
 arquivobd = os.path.join(caminho, "frutas.db") 
 # sqlalchemy 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///"+arquivobd 
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False # remover warnings 
+app.config["SQLALCHEMY_TRACK_MODIFICTIONS"] = False # remover warnings 
 db = SQLAlchemy(app)
 
 class Fruta(db.Model):
