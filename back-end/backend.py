@@ -15,12 +15,17 @@ def mostrar_frutas():
     resposta.headers.add("Acess-Control-Allow-Origin","*")
     return resposta
 
-@app.route("/incluir_fruta", methods=['posts'])
+@app.route("/incluir_fruta", methods=['post'])
 def incluir_fruta(): 
-    dados = request.get_json()
-    nova_fruta = Fruta(**dados)
-    db.session.add(nova_planta)
-    db.session.commit()
-    return {"resultado": 'ok'}
+    resposta_2 = jsonify({"resultado": "ok", "detalhes": "ok"}) 
+    dados = request.get_json(force=True)
+    try:
+        nova_fruta = Fruta(**dados) 
+        db.session.add(nova_fruta)
+        db.session.commit()
+    except Exception as e:
+        resposta_2 = jsonify({"resultado":"erro", "detalhes":str(e)}) 
+    resposta_2.headers.add("Access-Control-Allow-Origin", "*") 
+    return resposta_2
 
 app.run(debug=True)

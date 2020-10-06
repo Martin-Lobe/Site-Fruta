@@ -1,8 +1,9 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from modelo import Fruta
 from flask_cors import CORS
 import os
+import json
 app = Flask(__name__) 
 CORS(app)
 # caminho do arquivo de banco de dados 

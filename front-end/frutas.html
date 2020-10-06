@@ -7,7 +7,10 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
+    <style>
+      .hidden{display: none;}
+    </style>
+    <link rel="icon" type="image/png" href="imagens/banana.jpg"/>
     <title>Sistema de Frutas</title>
   </head>
   <body>
@@ -21,16 +24,18 @@
               <span class="navbar-text">Frutas</span>
               <a class="nav-link nav-item" href="#" id= "link_pagina_sobre"> Sobre <span class="sr-only">(current)</span></a>
               <a class="nav-link nav-item" href="#" id="link_listar_frutas"> Lista </a>
-              <a class="nav-link nav-item" href="#" id="link_incluir_frutas"> Incluir </a>
+              <a class="nav-link nav-item" href="#" data-toggle="modal" data-target="#exampleModal"> Incluir </a>
         </div>
       </nav>
 
       <div id="corpoDaPagina">
-        <div id="conteudoPrimario" class=invisible>
-          Seja bem vindo ao melhor sistema de Frutas!
+        <div id="conteudoPrimario" class=hidden>
+          <p>Seja bem vindo ao melhor sistema de Frutas!</p>
+          <p>Esse site foi criada por Martin Baraldi Lobe com o obejtivo de armazenar e mostrar informações sobre frutas.</p>
+          <p>Obrigado Por visitar</p>
         </div>
 
-        <table id="tabelaFrutas"class="table invisible">
+        <table id="tabelaFrutas"class="table hidden">
           <thead>
             <tr>
               <th scope="col">Nome</th>
@@ -44,6 +49,52 @@
 
           </tbody>
         </table>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Incluir Nova Fruta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Nome da Fruta:</label>
+                    <input type="text" class="form-control" id="nome_planta">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Nome Científico:</label>
+                    <input type="text" class="form-control" id="nome_cientifico">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Árvore:</label>
+                    <input type="text" class="form-control" id="arvore">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Cor:</label>
+                    <input type="text" class="form-control" id="cor">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Calorias:</label>
+                    <input type="text" class="form-control" id="calorias">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="botao_incluir_fruta">Incluir</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
 

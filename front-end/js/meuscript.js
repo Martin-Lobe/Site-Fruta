@@ -1,5 +1,6 @@
 $( document ).ready(function() {
-    $('#conteudoPrimario').removeClass("invisible");
+    $('#conteudoPrimario').removeClass("hidden");
+
     $('#link_listar_frutas').click(function(){
         $.ajax({
         url: 'http://localhost:5000/mostrar_frutas',
@@ -25,11 +26,67 @@ $( document ).ready(function() {
             linhas_tabela = linhas_tabela + lin;
         }
         $('#corpoTabelaFrutas').html(linhas_tabela);
-        $('#conteudoPrimario').addClass("invisible");
-        $('#tabelaFrutas').addClass("invisible");
-        $('#tabelaFrutas').removeClass("invisible");
+        $('#conteudoPrimario').addClass("hidden");
+        $('#tabelaFrutas').removeClass("hidden");
+        $('#tabelaFrutas').addClass("show");
+
 
     }
     });
 
-  });
+    $('#link_pagina_sobre').click(function(){
+        $.ajax({
+        url: 'http://localhost:5000/mostrar_frutas',
+        method: 'GET',
+        dataType: 'json', // os dados são recebidos no formato json
+        success: pagina_sobre, // chama a função listar frutas para processar o resultado
+        error: function() {
+            alert("erro ao ler dados, verifique o backend");
+        }
+    });
+    function pagina_sobre() {
+        $('#tabelaFrutas').addClass("hidden");
+        $('#conteudoPrimario').removeClass("hidden");
+        $('#conteudoPrimario').addClass("show");
+    }
+    });
+
+    $('#botao_incluir_fruta').click(function(){
+
+    nome_planta = $("#nome_planta").val();
+    nome_cientifico = $("#nome_cientifico").val();
+    arvore = $("#arvore").val();
+    cor = $("#cor").val();
+    calorias = $("#calorias").val();
+    
+    dados_incluir = JSON.stringify({nome: nome_planta, arvore: arvore, nome_binomial: nome_cientifico, cor: cor, calorias: calorias });
+    
+    $.ajax({
+        url : 'http://localhost:5000/incluir_fruta',
+        type : 'POST',
+        contentType : 'application/json', //mandando em json os dados
+        dataType : 'json',
+        data : dados_incluir,
+        success : incluirFruta,
+        error : erroIncluirFruta
+    });
+    function incluirFruta(resposta_2){
+        if (resposta_2.resultado=="ok"){
+            alert("Fruta foi incluida com sucesso!!!");
+            $("#nome_planta").val("");
+            $("#nome_cientifico").val("");
+            $("#arvore").val("");
+            $("#cor").val("");
+            $("#calorias").val("");
+        }
+    else {
+        alert("Erro no back-end para incluir fruta.");
+    }
+    }
+    function erroIncluirFruta(resposta_2){
+        alert("Erro ao mandar dados para o back end.");
+    }
+    });
+
+
+});
