@@ -1,5 +1,5 @@
 from config import *
-
+from modelo import Fruta
 
 @app.route("/")
 def normal():
@@ -27,5 +27,18 @@ def incluir_fruta():
         resposta_2 = jsonify({"resultado":"erro", "detalhes":str(e)}) 
     resposta_2.headers.add("Access-Control-Allow-Origin", "*") 
     return resposta_2
+
+@app.route("/excluir_frutas/<int:fruta_id>", methods=['DELETE'])
+def excluir_fruta(fruta_id):
+    print("aaaaaaaaaaaaa")
+    resposta = jsonify({"resultado":"ok","detalhes":"ok"})
+    try:
+        fruta = Fruta.query.get_or_404(fruta_id)
+        db.session.delete(fruta)
+        db.session.commit()
+    except Exception as e:
+        resposta = jsonify({"resultado":"erro","detalhes":str(e)})
+    resposta.headers.add("Acess-Control-Allow-Origin", "*")
+    return resposta
 
 app.run(debug=True)
