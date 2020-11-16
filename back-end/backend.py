@@ -1,5 +1,7 @@
 from config import *
 from modelo import Fruta
+from modelo import Suco
+from modelo import Quitanda
 
 @app.route("/")
 def normal():
@@ -10,7 +12,7 @@ def mostrar_frutas():
     frutas = db.session.query(Fruta).all()
     retornar = []
     for f in frutas:
-        retornar.append(f.transformar())
+        retornar.append(f.json())
     resposta = jsonify(retornar)
     resposta.headers.add("Acess-Control-Allow-Origin","*")
     return resposta
@@ -30,7 +32,6 @@ def incluir_fruta():
 
 @app.route("/excluir_frutas/<int:fruta_id>", methods=['DELETE'])
 def excluir_fruta(fruta_id):
-    print("aaaaaaaaaaaaa")
     resposta = jsonify({"resultado":"ok","detalhes":"ok"})
     try:
         fruta = Fruta.query.get_or_404(fruta_id)
@@ -39,6 +40,26 @@ def excluir_fruta(fruta_id):
     except Exception as e:
         resposta = jsonify({"resultado":"erro","detalhes":str(e)})
     resposta.headers.add("Acess-Control-Allow-Origin", "*")
+    return resposta
+
+@app.route("/mostrar_suco")
+def mostrar_sucos():
+    sucos = db.session.query(Suco).all()
+    retornar = []
+    for s in sucos:
+        retornar.append(s.json())
+    resposta = jsonify(retornar)
+    resposta.headers.add("Acess-Control-Allow-Origin","*")
+    return resposta
+
+@app.route("/mostrar_quitanda")
+def mostrar_quitandas():
+    quitanda = db.session.query(Quitanda).all()
+    retornar = []
+    for q in quitanda:
+        retornar.append(q.json())
+    resposta = jsonify(retornar)
+    resposta.headers.add("Acess-Control-Allow-Origin","*")
     return resposta
 
 app.run(debug=True)

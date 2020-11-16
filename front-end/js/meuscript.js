@@ -55,13 +55,12 @@ $( document ).ready(function() {
         $('#conteudoPrimario').addClass("show");
     }
     });
-
     $('#botao_incluir_fruta').click(function(){
 
     nome_planta = $("#nome_planta").val();
     nome_cientifico = $("#nome_cientifico").val();
     arvore = $("#arvore").val();
-    cor = $("#cor").val();
+    cor = String($("#cor").val());
     calorias = $("#calorias").val();
     
     dados_incluir = JSON.stringify({nome: nome_planta, arvore: arvore, nome_binomial: nome_cientifico, cor: cor, calorias: calorias });
