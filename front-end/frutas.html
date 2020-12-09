@@ -21,9 +21,10 @@
         </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <span class="navbar-text">Frutas</span>
               <a class="nav-link nav-item" href="#" id= "link_pagina_sobre"> Sobre <span class="sr-only">(current)</span></a>
-              <a class="nav-link nav-item" href="#" id="link_listar_frutas"> Lista </a>
+              <a class="nav-link nav-item" href="#" id="link_listar_frutas"> Lista-Fruta</a>
+              <a class="nav-link nav-item" href="#" id="link_listar_sucos"> Lista-Suco</a>
+              <a class="nav-link nav-item" href="#" id="link_listar_quitandas"> Lista-Quitanda</a>
               <a class="nav-link nav-item" href="#" data-toggle="modal" data-target="#exampleModal"> Incluir </a>
         </div>
       </nav>
@@ -47,6 +48,33 @@
             </tr>
           </thead>
           <tbody id="corpoTabelaFrutas">
+
+          </tbody>
+        </table>
+
+        <table id="tabelaSucos"class="table hidden">
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Tamanho</th>
+              <th scope="col">Data_fabricacao</th>
+              <th scope="col">Fruta</th>
+            </tr>
+          </thead>
+          <tbody id="corpoTabelaSucos">
+
+          </tbody>
+        </table>
+
+        <table id="tabelaQuitandas"class="table hidden">
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Suco</th>
+              <th scope="col">Dono</th>
+            </tr>
+          </thead>
+          <tbody id="corpoTabelaQuitandas">
 
           </tbody>
         </table>
@@ -96,6 +124,8 @@
             </div>
           </div>
         </div>
+
+        
 
       </div>
 

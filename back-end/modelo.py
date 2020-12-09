@@ -41,12 +41,14 @@ class Quitanda(db.Model):
     nome = db.Column(db.String(254))
     suco_id = db.Column(db.Integer, db.ForeignKey(Suco.id), nullable=False)
     suco = db.relationship("Suco")
+    dono = db.Column(db.String(254))
     def json(self):
         return {
             "id": self.id,
             "nome": self.nome,
             "suco_id": self.suco_id,
-            "suco": self.suco.json()
+            "suco": self.suco.json(),
+            "dono": self.dono
         }
 
 
@@ -56,7 +58,7 @@ if __name__ == "__main__":
     
     nova_fruta = Fruta(nome="Morango", arvore="Morangueiro", nome_binomial="Fragaria L", cor="Vermelho", calorias=33)
     novo_suco = Suco(nome="Suco_de_Morango", tamanho="Grande", data_fabricacao="23/09/2020", fruta=nova_fruta)
-    nova_quitanda = Quitanda(nome="Quitanda_do_Martin", suco=novo_suco)
+    nova_quitanda = Quitanda(nome="Quitanda_do_Martin", suco=novo_suco, dono="Pedro")
     db.session.add(nova_fruta)
     db.session.add(novo_suco)
     db.session.add(nova_quitanda)

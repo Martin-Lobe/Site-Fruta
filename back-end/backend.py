@@ -42,6 +42,30 @@ def excluir_fruta(fruta_id):
     resposta.headers.add("Acess-Control-Allow-Origin", "*")
     return resposta
 
+@app.route("/excluir_quitandas/<int:quitanda_id>", methods=['DELETE'])
+def excluir_quitanda(quitanda_id):
+    resposta = jsonify({"resultado":"ok","detalhes":"ok"})
+    try:
+        quitanda = Quitanda.query.get_or_404(quitanda_id)
+        db.session.delete(quitanda)
+        db.session.commit()
+    except Exception as e:
+        resposta = jsonify({"resultado":"erro","detalhes":str(e)})
+    resposta.headers.add("Acess-Control-Allow-Origin", "*")
+    return resposta
+    
+@app.route("/excluir_sucos/<int:suco_id>", methods=['DELETE'])
+def excluir_suco(suco_id):
+    resposta = jsonify({"resultado":"ok","detalhes":"ok"})
+    try:
+        suco = Suco.query.get_or_404(suco_id)
+        db.session.delete(suco)
+        db.session.commit()
+    except Exception as e:
+        resposta = jsonify({"resultado":"erro","detalhes":str(e)})
+    resposta.headers.add("Acess-Control-Allow-Origin", "*")
+    return resposta
+
 @app.route("/mostrar_suco")
 def mostrar_sucos():
     sucos = db.session.query(Suco).all()
